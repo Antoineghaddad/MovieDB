@@ -1,9 +1,33 @@
 const express = require('express');
 const port = 3000;
 const app = express();
+var movies = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+
 app.listen(port, function () {
     console.log("Server is running on "+ port +" port");
   });
+
+  app.get('/movies/create' ,function(req,res){
+   
+});
+
+app.get('/movies/read' ,function(req,res){
+    res.status(200).send(movies);
+});
+
+app.get('/movies/update' ,function(req,res){
+    
+});
+app.get('/movies/delete' ,function(req,res){
+
+});
+
+
 
 app.get('/search' ,function(req,res){
      if(req.query.s == ""){
@@ -15,7 +39,7 @@ app.get('/search' ,function(req,res){
 });
 
 app.get('/hello/:id' ,function(req,res){
-      res.status(200).send('Message : hello' +" "+ req.params.id )
+      res.status(200).send('Message : hello' +" "+ req.params.id );
 });
 
 app.get('/hello/' ,function(req,res){
