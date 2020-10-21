@@ -5,9 +5,25 @@ app.listen(port, function () {
     console.log("Server is running on "+ port +" port");
   });
 
+app.get('/search' ,function(req,res){
+     if(req.query.s == ""){
+         res.status(500).send('Error:true , Message:you have to provide a search');
+         
+     }else{
+         res.status(200).send('Message:ok , data:' +req.query.s);
+     }
+});
+
+app.get('/hello/:id' ,function(req,res){
+      res.status(200).send('Message : hello' +" "+ req.params.id )
+});
+
+app.get('/hello/' ,function(req,res){
+    res.status(200).send('Message:hello')
+});
 
 app.get('/test' ,function(req,res){
-    res.send('{ status:200, message:ok }')
+    res.status(200).send('Message :ok ')
 });
 
 app.get('/time',function(req,res){
@@ -27,7 +43,7 @@ app.get('/time',function(req,res){
     }
     var time = hours + ":" + minutes;
     
-    res.send('{status:200, message:'+time+'}');
+    res.status(200).send("Message: ok , Date:" +time);
 });
    
 
