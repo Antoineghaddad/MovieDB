@@ -13,8 +13,25 @@ app.listen(port, function () {
   });
 
   app.get('/movies/create' ,function(req,res){
-   
+      var titre = req.query.title;
+      var rate = req.query.rating;
+      var date = req.query.year;
+    if(typeof(titre)== "undefined" || titre == "" || date == "" || date.length !== 4 || isNaN(date) || isNaN(rate)){
+      res.status(403).send('error:true, message:you cannot create a movie without providing a title and a year')
+    }
+else if(typeof(rate) === "undefined" || rate < 0 ){
+    add = {title:titre, year:parseInt(date) ,rating:4 }
+       
+   }else{
+       add = {title:titre, year :parseInt(date) ,rating:parseInt(rate) };
+       movies.push(add);
+       res.send(movies);
+   }
+       
+    
+    
 });
+
 
 app.get('/movies/read' ,function(req,res){
     res.status(200).send(movies);
@@ -26,7 +43,7 @@ app.get('/movies/read/by-date' ,function(req,res){
 });
 
 app.get('/movies/read/by-rating' ,function(req,res){
-    movies.sort(function(a, b){return a.rating - b.rating});
+    movies.sort(function(a, b){return b.rating - a.rating});
     res.status(200).send(movies);
 });
 
@@ -44,6 +61,7 @@ app.get('/movies/read/id/:id' ,function(req,res){
    }
 
 });
+
 
 
 
