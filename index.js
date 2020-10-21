@@ -68,8 +68,18 @@ app.get('/movies/read/id/:id' ,function(req,res){
 app.get('/movies/update' ,function(req,res){
     
 });
-app.get('/movies/delete' ,function(req,res){
+app.get('/movies/delete/:id' ,function(req,res){
+    if(req.params.id <= movies.length){
+        movies.splice(req.params.id ,1);
+        res.status(200).send(movies);
+       }else{
+        res.status(404).send('error:true, message:the movie ' + req.params.id + ' does not exist');
+       }
+    
+});
 
+app.get('/movies/delete/' ,function(req,res){
+   res.status(200).send("Deleting");    
 });
 
 
