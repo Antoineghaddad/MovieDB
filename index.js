@@ -12,7 +12,7 @@ app.listen(port, function () {
     console.log("Server is running on " + port + " port");
 });
 
-app.get('/movies/create', function (req, res) {
+app.post('/movies/create', function (req, res) {
     var titre = req.query.title;
     var rate = req.query.rating;
     var date = req.query.year;
@@ -67,7 +67,7 @@ app.get('/movies/read/id/:id', function (req, res) {
 
 
 
-app.get('/movies/update/:id/', function (req, res) {
+app.put('/movies/update/:id/', function (req, res) {
     var id = req.params.id;
     var rate = req.query.rating;
     var newTitle = req.query.title; 
@@ -105,9 +105,13 @@ app.get('/movies/update/:id/', function (req, res) {
           res.send(movies);
 });
 
+app.put('/movies/update/', function (req, res) {
+    res.status(200).send("What do you want to delete ?");
+});
 
 
-app.get('/movies/delete/:id', function (req, res) {
+
+app.delete('/movies/delete/:id', function (req, res) {
     if (req.params.id <= movies.length) {
         movies.splice(req.params.id, 1);
         res.status(200).send(movies);
@@ -117,7 +121,7 @@ app.get('/movies/delete/:id', function (req, res) {
 
 });
 
-app.get('/movies/delete/', function (req, res) {
+app.delete('/movies/delete/', function (req, res) {
     res.status(200).send("Deleting");
 });
 
